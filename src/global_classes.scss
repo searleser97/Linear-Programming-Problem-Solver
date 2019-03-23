@@ -1,0 +1,104 @@
+.small-space {
+  width: 10px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.not_selectable {
+  user-select: none;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.title-size {
+  font-size: 25px;
+}
+
+.form-title-size {
+  font-size: 20px;
+}
+
+.divider {
+  width: 100%;
+  border: 0.5px solid gray;
+  display: flex;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.hide {
+  display: none;
+}
+
+.table_container {
+  overflow-x: auto;
+  flex-shrink: 0;
+  width: 100%;
+  display: flex;
+}
+
+mat-card {
+  width: 100%;
+  height: fit-content;
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-nav-list {
+  padding-top: 0;
+}
+
+table {
+  width: 100%;
+  min-width: 900px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+th.mat-header-cell:first-of-type {
+  padding-left: 0;
+}
+
+th.mat-header-cell:last-of-type {
+  padding-right: 0;
+}
+
+th.mat-header-cell {
+  text-align: center;
+}
+
+td.mat-cell:first-of-type {
+  padding-left: 0;
+}
+
+td.mat-cell:last-of-type {
+  padding-right: 0;
+}
+
+td.mat-cell {
+  text-align: center;
+}
+
+th div.mat-sort-header-container {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  text-align: center;
+  //width: fit-content;
+}

@@ -1,0 +1,42 @@
+<div class="base_container">
+  <mat-toolbar color="primary">
+    <button mat-stroked-button (click)="drawer.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <div class="space"></div>
+    <div class="app-name"></div>
+    <div class="space"></div>
+    <div class="ipn_img"></div>
+  </mat-toolbar>
+
+  <mat-drawer-container [hasBackdrop]="showBackdrop">
+
+    <mat-drawer #drawer [mode]="drawerMode" [opened]="drawerOpened">
+      <mat-accordion displayMode="flat" [multi]="false" [hideToggle]="true">
+        <mat-expansion-panel *ngFor="let option of menu; let i = index;" class="option" #exp_panel
+                             (expandedChange)="option.hasSuboptions ? flipOptionIcon('option_icon' + i) : exp_panel.close();"
+                             (click)="chosenItem = i" [ngClass]="{'back-lightgray': i == chosenItem}">
+          <mat-expansion-panel-header class="not_selectable"
+                                      (click)="!option.hasSuboptions ? navigate(option.path) : false">
+            <mat-panel-title>
+              {{option.description}}
+            </mat-panel-title>
+            <mat-icon class="option-icon" [id]="'option_icon' + i">{{option.icon}}</mat-icon>
+          </mat-expansion-panel-header>
+          <div *ngIf="option.hasSuboptions">
+            <button *ngFor="let suboption of option.suboptions; let j = index;" mat-stroked-button class="suboptionBtn"
+                    (click)="chosenSubItem = i + '' + j; navigate(suboption.path)"
+                    [ngClass]="{'back-gray': i + '' + j == chosenSubItem}">
+              {{suboption.description}}
+            </button>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-drawer>
+
+    <mat-drawer-content>
+      <router-outlet></router-outlet>
+    </mat-drawer-content>
+
+  </mat-drawer-container>
+</div>

@@ -1,0 +1,97 @@
+@import '~src/global_vars';
+@import '~src/global_classes';
+
+.base_container {
+  height: 100vh;
+  width: 100vw;
+}
+
+mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  white-space: normal;
+  flex: 0 0 auto;
+  height: fit-content;
+}
+
+.ipn_img {
+  background: url("~src/assets/ipn.png") no-repeat;
+  background-size: 100% 100%;
+  width: 30px;
+  height: 45px;
+}
+
+.space {
+  width: 20px;
+}
+
+.sidenav-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0;
+  height: 45px;
+  flex-shrink: 0;
+  border-right: 1px solid white;
+}
+
+mat-drawer {
+  width: 240px;
+}
+
+mat-drawer-content {
+  background: $back-color;
+  height: calc(100vh - 45px);
+  ::ng-deep {
+    .container {
+      height: 100%;
+    }
+  }
+}
+
+.app-name::before {
+  content: $app-name;
+}
+
+@media screen and (max-width: 600px) {
+  .app-name::before {
+    content: '';
+  }
+}
+
+.option {
+  background: ghostwhite;
+  white-space: normal;
+  flex-shrink: 0;
+  border-bottom: 1px solid #bfbfbf;
+}
+
+.suboptionBtn {
+  width: 100%;
+  text-align: left;
+  white-space: normal;
+  border-color: #b3b3b3;
+  border-width: 0 0 0 1px;
+  border-radius: 0 10px 10px 0;
+  line-height: 22px;
+  padding: 7px 3px 7px 8px;
+}
+
+.option-icon {
+  color: gray;
+  transition-duration: 0.4s;
+  transition-property: transform;
+}
+
+.option-icon-rotated {
+  transform: rotate(90deg);
+}
+
+.back-lightgray {
+  background: #e6e6e6;
+}
+
+.back-gray {
+  background: #bfbfbf;
+}

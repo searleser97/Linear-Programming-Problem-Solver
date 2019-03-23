@@ -1,0 +1,50 @@
+@import '~@angular/material/theming';
+@import '~src/global_vars';
+
+@include mat-core();
+
+$app-primary: mat-palette($mat-pink, 900);
+$app-accent: mat-palette($mat-amber, 700, 800, 900);
+//$app-warn: mat-palette($mat-orange, 900, 400, 700);
+$app-warn: mat-palette($mat-red, 700);
+$app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
+
+@include angular-material-theme($app-theme);
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: $back-color;
+}
+
+//* {
+//  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+//  color: gray;
+//}
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+}
+
+::-webkit-scrollbar-thumb {
+
+  background: #666666;
+  border: 0 none #ffffff;
+  border-radius: 50px;
+}
+
+::-webkit-scrollbar-track {
+  background: #e1e1e1;
+  border: 0 none #ffffff;
+  border-radius: 50px;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}

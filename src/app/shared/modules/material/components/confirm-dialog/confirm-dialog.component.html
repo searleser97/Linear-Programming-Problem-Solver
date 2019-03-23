@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>
+  {{data.content}}
+</div>
+<div *ngIf="invertBtns; else normal" mat-dialog-actions align="end">
+  <button mat-button color="primary" (click)="onCancel() " id="hugo" cdkFocusInitial>{{data.cancel}}</button>
+  <button mat-button color="warn" (click)="onConfirm()" id="hugo2">{{data.ok}}</button>
+</div>
+
+<ng-template #normal>
+  <div mat-dialog-actions align="end">
+    <button mat-button color="warn" (click)="onCancel()" id="hugo3">{{data.cancel}}</button>
+    <button mat-button color="primary"  id="hugo4" (click)="onConfirm()" cdkFocusInitial>{{data.ok}}</button>
+  </div>
+</ng-template>
