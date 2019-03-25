@@ -2,6 +2,12 @@
   width: 10px;
 }
 
+.vertical_space {
+  display: flex;
+  flex-shrink: 0;
+  height: 10px;
+}
+
 .bold {
   font-weight: bold;
 }

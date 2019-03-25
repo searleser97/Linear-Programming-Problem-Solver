@@ -140,5 +140,10 @@
       }
     }
   },
-  "defaultProject": "Linear-Programming-Problem-Solver"
+  "defaultProject": "Linear-Programming-Problem-Solver",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }
