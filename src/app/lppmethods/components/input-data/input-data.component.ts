@@ -66,7 +66,6 @@ export class InputDataComponent implements OnInit {
   }
 
   outputData() {
-    console.log('hola');
     const mat = Array.from({length: this.inputMatrix.length}, () => (Array(Object.keys(this.inputMatrix[0]).length).fill(0)));
     for (let i = 0; i < this.numberOfRestrictions + 1; i++)
       for (let j = 0; j < this.numberOfVariables + 2; j++) mat[i][j] = this.inputMatrix[i][j];

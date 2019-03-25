@@ -32,10 +32,10 @@ export class DualsimplexComponent implements OnInit {
     this.rowNames = [' ', ...this.rowNames, 'Zj', 'Cj'];
     this.columnNames = ['Solution Vector'];
 
-    const dsData = new DualSimplexData(data.restrictions, data.isMaximization);
+    const dsData = new DualSimplexData(this.matrixCopy(data.restrictions), data.isMaximization);
     this.fixInput(dsData);
     this.iterations = [dsData];
-    // this.dualSimplex(dsData.restrictions, dsData.zj, dsData.slackVariablesSol);
+    this.dualSimplex(this.matrixCopy(dsData.restrictions), dsData.zj, dsData.slackVariablesSol);
   }
 
   makeZeroIfCloseToZero(n) {
@@ -89,7 +89,7 @@ export class DualsimplexComponent implements OnInit {
         isFinalIteration = false;
     }
 
-    this.iterations.push(new DualSimplexData(mat, false, zj, ssol, [keyRow, keyCol]));
+    this.iterations.push(new DualSimplexData(this.matrixCopy(mat), false, zj, ssol, [keyRow, keyCol]));
 
     if (!isFinalIteration)
       return this.dualSimplex(mat, zj, ssol);
@@ -116,7 +116,7 @@ export class DualsimplexComponent implements OnInit {
         for (let j = 0; j < restriction.length; j++)
           restriction[j] = -1 * restriction[j];
 
-    if (data.isMaximitation) data.restrictions = this.modifiedTranspose(data.restrictions);
+    if (data.isMaximization) data.restrictions = this.modifiedTranspose(data.restrictions);
 
     for (let i = 1; i < data.restrictions.length; i++) {
       for (let j = 1; j < data.restrictions.length; j++)
@@ -134,8 +134,17 @@ export class DualsimplexComponent implements OnInit {
   }
 
   getSolution(i, mat) {
-    console.log(mat);
     if (i >= mat.length) return ' ';
     else return mat[i][0];
+  }
+
+  matrixCopy(mat: number[][]) {
+    const copy = Array.from({
+      length: mat.length
+    }, () => (Array(mat[0].length).fill(0)));
+    for (let i = 0; i < mat.length; i++)
+      for (let j = 0; j < mat[i].length; j++)
+        copy[i][j] = mat[i][j];
+    return copy;
   }
 }
