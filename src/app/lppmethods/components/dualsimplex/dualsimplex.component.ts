@@ -29,8 +29,8 @@ export class DualsimplexComponent implements OnInit {
       this.rowNames.push('S' + i);
     }
     // this.columnNames = ['Name', 'CBi', ...variables, ' ', 'Solution Vector'];
-    this.rowNames = [' ', ...this.rowNames, 'Zj', 'Cj'];
-    this.columnNames = ['Solution Vector'];
+    this.rowNames = [...this.rowNames, 'Cj', 'Zj'];
+    this.columnNames = [' ', 'Solution Vector'];
 
     const dsData = new DualSimplexData(this.matrixCopy(data.restrictions), data.isMaximization);
     this.fixInput(dsData);
@@ -133,9 +133,10 @@ export class DualsimplexComponent implements OnInit {
     return arr;
   }
 
-  getSolution(i, mat) {
-    if (i >= mat.length) return ' ';
-    else return mat[i][0];
+  getSolution(i: number, mat: number[][]) {
+    if (i + 1 === mat.length) return mat[0][0];
+    if (i + 1 > mat.length) return ' ';
+    else return mat[i + 1][0];
   }
 
   matrixCopy(mat: number[][]) {
@@ -146,5 +147,19 @@ export class DualsimplexComponent implements OnInit {
       for (let j = 0; j < mat[i].length; j++)
         copy[i][j] = mat[i][j];
     return copy;
+  }
+
+  arrayCopy(arr: any[]) {
+    const copy = Array(arr.length);
+    for (let i = 0; i < arr.length; i++)
+      copy[i] = arr[i];
+    return copy;
+  }
+
+  getRowName(i: number, pivot: number[], arr: string[]) {
+    console.log(i, pivot);
+    if (pivot && (pivot[0] - 1) === i)
+      arr[i] =  'X' + (pivot[1] - 1);
+    return arr[i];
   }
 }
