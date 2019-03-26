@@ -41,7 +41,7 @@ export class DualsimplexComponent implements OnInit {
     dsData.rowNames = this.arrayCopy(this.rowNames);
     this.fixInput(dsData);
     this.iterations = [dsData];
-    this.dualSimplex(this.matrixCopy(dsData.restrictions), dsData.zj, dsData.slackVariablesSol);
+    this.dualSimplex(this.matrixCopy(dsData.restrictions), this.arrayCopy(dsData.zj), this.arrayCopy(dsData.slackVariablesSol));
     this.displayMatrix = true;
   }
 
@@ -98,7 +98,11 @@ export class DualsimplexComponent implements OnInit {
 
     this.rowNames[keyRow] = (keyCol > ((zj.length - 1) >> 1) ? 'S' : 'X') + (keyCol - 1);
 
-    this.iterations.push(new DualSimplexData(this.matrixCopy(mat), false, zj, ssol, [keyRow, keyCol], this.arrayCopy(this.rowNames)));
+    this.iterations.push(
+      new DualSimplexData(
+        this.matrixCopy(mat), false, this.arrayCopy(zj), this.arrayCopy(ssol), [keyRow, keyCol], this.arrayCopy(this.rowNames)
+      )
+    );
 
     if (!isFinalIteration)
       return this.dualSimplex(mat, zj, ssol);
@@ -142,11 +146,6 @@ export class DualsimplexComponent implements OnInit {
     return arr;
   }
 
-  getSolution(i: number, mat: number[][]) {
-    if (i >= mat.length) return ' ';
-    return mat[i][0];
-  }
-
   matrixCopy(mat: number[][]) {
     const copy = Array.from({
       length: mat.length
@@ -164,8 +163,11 @@ export class DualsimplexComponent implements OnInit {
     return copy;
   }
 
-  getCoef(i: number, j: number, mat: number[][]) {
-    if (i >= mat.length) return ' ';
-    return mat[i][j];
+  getCoef(i: number, j: number, iteration: DualSimplexData) {
+    if (i >= iteration.restrictions.length)
+      return iteration.zj[j] === Math.floor(iteration.zj[j]) ? iteration.zj[j] : iteration.zj[j].toFixed(3);
+    if (Math.floor(iteration.restrictions[i][j]) === iteration.restrictions[i][j])
+      return iteration.restrictions[i][j];
+    return iteration.restrictions[i][j].toFixed(3);
   }
 }
