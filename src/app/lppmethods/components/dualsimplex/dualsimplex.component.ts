@@ -25,23 +25,31 @@ export class DualsimplexComponent implements OnInit {
   }
 
   execDualSimplex(data: InputData) {
+
+    const dsData = new DualSimplexData(this.matrixCopy(data.restrictions), data.isMaximization);
+    this.fixInput(dsData);
+
+    alert(dsData.zj.length);
+
     this.variables = [];
-    for (let i = 0; i < data.variablesCount; i++) this.variables.push('X' + i);
-    for (let i = 0; i < data.variablesCount; i++) {
+
+    for (let i = 0; i < dsData.zj.length - dsData.slackVariablesSol.length - 1; i++) this.variables.push('X' + i);
+
+    for (let i = 0; i < dsData.slackVariablesSol.length; i++) {
       this.variables.push('S' + i);
       this.rowNames.push('S' + i);
     }
-    console.log(this.variables);
+
     this.columnNames = ['Name', ...this.variables, 'Solution Vector'];
     this.auxColumnNames = ['Solution Vector', ...this.variables];
     this.rowNames = ['Cj', ...this.rowNames, 'Zj'];
-    // this.columnNames = [' ', ...variables, 'Inequality Sign', 'Solution Vector'];
 
-    const dsData = new DualSimplexData(this.matrixCopy(data.restrictions), data.isMaximization);
     dsData.rowNames = this.arrayCopy(this.rowNames);
-    this.fixInput(dsData);
+
     this.iterations = [dsData];
+
     this.dualSimplex(this.matrixCopy(dsData.restrictions), this.arrayCopy(dsData.zj), this.arrayCopy(dsData.slackVariablesSol));
+
     this.displayMatrix = true;
   }
 
@@ -73,8 +81,10 @@ export class DualsimplexComponent implements OnInit {
   dualSimplex(mat, zj, ssol) {
     const keyRow = this.getKeyRow(mat);
     const keyCol = this.getKeyColumn(mat[keyRow], zj, mat[0]);
-    if (keyCol === -1)
+    if (keyCol === -1) {
+      alert('This problem is not feasible, cannot be solved using Dual Simplex');
       return false;
+    }
     const keyPivot = mat[keyRow][keyCol];
     ssol[keyRow - 1] = mat[0][keyCol]; // cj.size * 2 = ssol.size Check exception
 
@@ -123,13 +133,16 @@ export class DualsimplexComponent implements OnInit {
     return transposed;
   }
 
-  fixInput(data) {
+  fixInput(data: DualSimplexData) {
     for (const restriction of data.restrictions)
       if (restriction.pop() === 1)
         for (let j = 0; j < restriction.length; j++)
           restriction[j] = -1 * restriction[j];
 
     if (data.isMaximization) data.restrictions = this.modifiedTranspose(data.restrictions);
+
+    data.zj = Array(data.restrictions[0].length).fill(0);
+    data.slackVariablesSol = Array(data.restrictions.length - 1).fill(0);
 
     for (let i = 1; i < data.restrictions.length; i++) {
       for (let j = 1; j < data.restrictions.length; j++)
