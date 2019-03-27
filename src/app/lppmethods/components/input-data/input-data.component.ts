@@ -39,13 +39,9 @@ export class InputDataComponent implements OnInit {
     this.inputMatrix = [];
 
     const row = {};
-    for (let i = 0; i < this.numberOfVariables + 2; i++) {
-      row[i] = 0;
-    }
+    for (let i = 0; i < this.numberOfVariables + 2; i++) row[i] = 0;
 
-    for (let i = 0; i < this.numberOfRestrictions + 1; i++) {
-      this.inputMatrix.push(Object.assign({}, row));
-    }
+    for (let i = 0; i < this.numberOfRestrictions + 1; i++) this.inputMatrix.push(Object.assign({}, row));
 
     // const row0 = {0: 0, 1: 1, 2: 2, 3: 3, 4: 0};
     // const row1 = {0: -4, 1: -2, 2: 1, 3: -1, 4: -1};

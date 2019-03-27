@@ -9,7 +9,7 @@
 
     <div class="table_container" *ngFor="let iteration of iterations">
 
-      <table mat-table [dataSource]="range(0, iteration.restrictions.length + 1)" style="margin-top: 20px;">
+      <table mat-table [dataSource]="range(0, iteration.restrictions.length + 2)" style="margin-top: 20px;">
 
         <ng-container matColumnDef="{{columnNames[0]}}">
           <th mat-header-cell *matHeaderCellDef>{{columnNames[0]}}</th>

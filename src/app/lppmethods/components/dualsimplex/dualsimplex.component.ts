@@ -42,7 +42,7 @@ export class DualsimplexComponent implements OnInit {
 
     this.columnNames = ['Name', ...this.variables, 'Solution Vector'];
     this.auxColumnNames = ['Solution Vector', ...this.variables];
-    this.rowNames = ['Cj', ...this.rowNames, 'Zj'];
+    this.rowNames = ['Cj', ...this.rowNames, 'Zj', 'Zj - Cj'];
 
     dsData.rowNames = this.arrayCopy(this.rowNames);
 
@@ -116,11 +116,7 @@ export class DualsimplexComponent implements OnInit {
 
     if (!isFinalIteration)
       return this.dualSimplex(mat, zj, ssol);
-    let ans = 0;
-    const limit = ((mat[0].length - 1) >> 1) + 1;
-    for (let i = 1; i < limit; i++) ans += mat[0][i] * mat[i][0];
-    console.log('Ans', ans);
-    return ans;
+    return mat[0][0];
   }
 
   modifiedTranspose(mat) {
@@ -176,11 +172,18 @@ export class DualsimplexComponent implements OnInit {
     return copy;
   }
 
+  getIntOrFixed(n: number) {
+    if (n === Math.floor(n))
+      return n;
+    else
+      return n.toFixed(3);
+  }
+
   getCoef(i: number, j: number, iteration: DualSimplexData) {
-    if (i >= iteration.restrictions.length)
-      return iteration.zj[j] === Math.floor(iteration.zj[j]) ? iteration.zj[j] : iteration.zj[j].toFixed(3);
-    if (Math.floor(iteration.restrictions[i][j]) === iteration.restrictions[i][j])
-      return iteration.restrictions[i][j];
-    return iteration.restrictions[i][j].toFixed(3);
+    if (i === iteration.restrictions.length)
+      return this.getIntOrFixed(iteration.zj[j]);
+    if (i > iteration.restrictions.length)
+      return this.getIntOrFixed(iteration.zj[j] - iteration.restrictions[0][j]);
+    return this.getIntOrFixed(iteration.restrictions[i][j]);
   }
 }
