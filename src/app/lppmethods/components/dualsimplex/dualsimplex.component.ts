@@ -1,13 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {InputData} from '../input-data/InputData';
 import {DualSimplexData} from './DualSimplexData';
+import {Method} from '../../interfaces/method';
 
 @Component({
   selector: 'app-dualsimplex',
   templateUrl: './dualsimplex.component.html',
   styleUrls: ['./dualsimplex.component.scss']
 })
-export class DualsimplexComponent implements OnInit {
+export class DualsimplexComponent implements OnInit, Method {
 
   INF = 1073741824;
   epsilon = 0.00001;
@@ -24,7 +25,7 @@ export class DualsimplexComponent implements OnInit {
   ngOnInit() {
   }
 
-  execDualSimplex(data: InputData) {
+  execute(data: InputData) {
 
     const dsData = new DualSimplexData(this.matrixCopy(data.restrictions), data.isMaximization);
     this.fixInput(dsData);

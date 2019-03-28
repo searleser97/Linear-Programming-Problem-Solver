@@ -6,14 +6,16 @@ import { DualsimplexComponent } from './components/dualsimplex/dualsimplex.compo
 import {MaterialModule} from '../shared/modules/material/material.module';
 import { InputDataComponent } from './components/input-data/input-data.component';
 import {FormsModule} from '@angular/forms';
+import { MainComponent } from './components/main/main.component';
 
 @NgModule({
-  declarations: [DualsimplexComponent, InputDataComponent],
+  declarations: [DualsimplexComponent, InputDataComponent, MainComponent],
   imports: [
     CommonModule,
     LppmethodsRoutingModule,
     MaterialModule,
     FormsModule
-  ]
+  ],
+  exports: [MainComponent]
 })
 export class LppmethodsModule { }

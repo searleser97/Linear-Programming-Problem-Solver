@@ -1,6 +1,7 @@
 import {Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {menuDB} from './side-nav.strings';
 import {Router} from '@angular/router';
+import {MainComponent} from '../../../lppmethods/components/main/main.component';
 
 @Component({
   selector: 'app-side-nav',
@@ -9,7 +10,7 @@ import {Router} from '@angular/router';
 })
 export class SideNavComponent implements OnInit {
 
-  @ViewChild('optionIcon', {read: ElementRef}) optionIcon: ElementRef;
+  @ViewChild(MainComponent) main: MainComponent;
 
   menuFull = menuDB;
   menu = [];
@@ -48,18 +49,13 @@ export class SideNavComponent implements OnInit {
 
   toggleClass(elem: any, className: string) {
     const hasClass = elem.classList.contains(className);
-    if (hasClass) {
-      this.renderer.removeClass(elem, className);
-    } else {
-      this.renderer.addClass(elem, className);
-    }
+    if (hasClass) this.renderer.removeClass(elem, className);
+    else this.renderer.addClass(elem, className);
   }
 
-  navigate(path: string) {
-    if (!path) {
-      return;
-    }
-    this.router.navigate([path]);
+  navigate(path: string = '') {
+    if (!path) return;
+    this.main.method = path;
   }
 
   loadMenu() {
