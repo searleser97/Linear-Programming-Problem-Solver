@@ -6,7 +6,7 @@ import {InputData} from '../input-data/InputData';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.sass']
+  styleUrls: ['./main.component.scss']
 })
 
 export class MainComponent implements OnInit {
@@ -32,6 +32,7 @@ export class MainComponent implements OnInit {
   }
 
   execute(inputData: InputData) {
+    console.log(this.method, this.methodsUrl[3]);
     console.log(this.methods);
     this.methods[this.method].execute(inputData);
   }

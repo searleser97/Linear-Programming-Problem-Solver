@@ -1,5 +1,7 @@
-<h1>{{titles[method]}}</h1>
+<div class="container">
+  <h1>{{titles[method]}}</h1>
 
-<app-input-data [hidden]="!method" (Execute)="execute($event)"></app-input-data>
+  <app-input-data [hidden]="!method" (Execute)="execute($event)"></app-input-data>
 
-<app-dualsimplex [hidden]="method === methodsUrl[3]"></app-dualsimplex>
+  <app-dualsimplex [hidden]="method !== methodsUrl[3]"></app-dualsimplex>
+</div>

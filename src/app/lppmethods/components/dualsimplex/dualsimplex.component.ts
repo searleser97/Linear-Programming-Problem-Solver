@@ -30,9 +30,8 @@ export class DualsimplexComponent implements OnInit, Method {
     const dsData = new DualSimplexData(this.matrixCopy(data.restrictions), data.isMaximization);
     this.fixInput(dsData);
 
-    alert(dsData.zj.length);
-
     this.variables = [];
+    this.rowNames = [];
 
     for (let i = 0; i < dsData.zj.length - dsData.slackVariablesSol.length - 1; i++) this.variables.push('X' + i);
 
@@ -107,7 +106,7 @@ export class DualsimplexComponent implements OnInit, Method {
         isFinalIteration = false;
     }
 
-    this.rowNames[keyRow] = (keyCol > ((zj.length - 1) >> 1) ? 'S' : 'X') + (keyCol - 1);
+    this.rowNames[keyRow] = this.columnNames[keyCol];
 
     this.iterations.push(
       new DualSimplexData(

@@ -23,7 +23,7 @@ export class InputDataComponent implements OnInit {
 
   ngOnInit() {
     this.isMaximization = true;
-    this.numberOfVariables = 2;
+    this.numberOfVariables = 3;
     this.numberOfRestrictions = 3;
   }
 
