@@ -1,7 +1,17 @@
 <div class="container">
   <h1>{{titles[method]}}</h1>
 
-  <app-input-data [hidden]="!method" (Execute)="execute($event)"></app-input-data>
+  <app-input-data style="width: 100%;" [hidden]="!method" (Execute)="execute($event)"></app-input-data>
 
-  <app-dualsimplex [hidden]="method !== methodsUrl[3]"></app-dualsimplex>
+  <app-random style="width: 100%;" [hidden]="method !== methodsUrl[0]"></app-random>
+
+  <!--<app-dualsimplex style="width: 100%;" [hidden]="method !== methodsUrl[1]"></app-dualsimplex>-->
+
+  <!--<app-dualsimplex style="width: 100%;" [hidden]="method !== methodsUrl[2]"></app-dualsimplex>-->
+
+  <app-dualsimplex style="width: 100%;" [hidden]="method !== methodsUrl[3]"></app-dualsimplex>
+
+  <app-genetic style="width: 100%;" [hidden]="method !== methodsUrl[4]"></app-genetic>
+
+  <app-analitic style="width: 100%;" [hidden]="method !== methodsUrl[5]"></app-analitic>
 </div>

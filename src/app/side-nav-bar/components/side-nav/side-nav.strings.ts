@@ -6,7 +6,8 @@ export const methodsUrl = [
   'simplex1',
   'simplex2',
   'dualsimplex',
-  'genetic'
+  'genetic',
+  'analitic'
 ];
 
 export const menuDB: Option[] = [
@@ -18,6 +19,6 @@ export const menuDB: Option[] = [
       new SubOption('Dual Simplex', methodsUrl[3])
     ],
     new Set([])),
-  new Option('Genetic', methodsUrl[4], 'chevron_right', false, [],
-    new Set([4, 5, 6, 9]))
+  new Option('Genetic', methodsUrl[4], 'chevron_right', false, [], new Set([])),
+  new Option('Analitic', methodsUrl[5], 'chevron_right', false, [], new Set([]))
 ];

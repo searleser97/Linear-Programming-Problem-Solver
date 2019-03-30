@@ -55,6 +55,7 @@ mat-card {
 mat-card-content {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 mat-card-actions {
@@ -62,9 +63,9 @@ mat-card-actions {
   justify-content: flex-end;
 }
 
-mat-form-field {
-  width: 100%;
-}
+//mat-form-field {
+//  width: 100%;
+//}
 
 mat-nav-list {
   padding-top: 0;
@@ -72,17 +73,15 @@ mat-nav-list {
 
 table {
   width: 100%;
-  min-width: 900px;
-  padding-left: 10px;
-  padding-right: 10px;
+  min-width: 100px;
 }
 
 th.mat-header-cell:first-of-type {
-  padding-left: 0;
+  //padding-left: 0;
 }
 
 th.mat-header-cell:last-of-type {
-  padding-right: 0;
+  //padding-right: 0;
 }
 
 th.mat-header-cell {
@@ -90,11 +89,11 @@ th.mat-header-cell {
 }
 
 td.mat-cell:first-of-type {
-  padding-left: 0;
+  //padding-left: 0;
 }
 
 td.mat-cell:last-of-type {
-  padding-right: 0;
+  //padding-right: 0;
 }
 
 td.mat-cell {
@@ -106,5 +105,5 @@ th div.mat-sort-header-container {
   align-content: center;
   justify-content: center;
   text-align: center;
-  //width: fit-content;
+  width: fit-content;
 }
