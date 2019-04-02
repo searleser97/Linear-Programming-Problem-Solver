@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {InputData} from './InputData';
+import {rootRenderNodes} from '@angular/core/src/view';
 
 @Component({
   selector: 'app-input-data',
@@ -86,9 +87,17 @@ export class InputDataComponent implements OnInit {
   }
 
   outputData() {
-    const mat = Array.from({length: this.inputMatrix.length}, () => (Array(Object.keys(this.inputMatrix[0]).length).fill(0)));
-    for (let i = 0; i < this.numberOfRestrictions + 1; i++)
-      for (let j = 0; j < this.numberOfVariables + 2; j++) mat[i][j] = this.inputMatrix[i][j];
+    const mat = [];
+    for (let i = 0; i < this.inputMatrix.length; i++) {
+      if (i !== 0 && this.inputMatrix[i][Object.keys(this.inputMatrix[i]).length - 1] === 0) {
+        this.inputMatrix[i][Object.keys(this.inputMatrix[i]).length - 1] = -1;
+        const rowCopy = this.objectCopy(this.inputMatrix[i]);
+        rowCopy[Object.keys(rowCopy).length - 1] = 1;
+        this.inputMatrix.push(rowCopy);
+      }
+      mat[i] = [];
+      for (let j = 0; j < Object.keys(this.inputMatrix[i]).length; j++) mat[i][j] = this.inputMatrix[i][j];
+    }
     this.Execute.emit(new InputData(mat, this.isMaximization, this.numberOfVariables, this.numberOfRestrictions));
   }
 
@@ -96,6 +105,14 @@ export class InputDataComponent implements OnInit {
     const arr = [];
     while (from < to) arr.push(from++);
     return arr;
+  }
+
+
+
+  objectCopy(o: object) {
+    const ans = {};
+    for (const key of Object.keys(o)) ans[key] = o[key];
+    return ans;
   }
 
 }
