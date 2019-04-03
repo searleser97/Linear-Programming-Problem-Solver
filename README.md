@@ -1,27 +1,52 @@
 # LinearProgrammingProblemSolver
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.5.
+## Commands to keep structure:
 
-## Development server
+### Create Angular 6 Project
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+`ng new {projectName} --style=scss --routing`
 
-## Code scaffolding
+### Create Module
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+`ng g m {moduleName} --routing`
 
-## Build
+### Create Shared Module
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+`ng g m shared/modules/{moduleName}`
 
-## Running unit tests
+### Create Component
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+`ng g c {moduleName}/components/{componentName} --module {moduleName}`
 
-## Running end-to-end tests
+### Create Class
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+`ng g cl {moduleName}/classes/{className}`
 
-## Further help
+### Create Interface
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+`ng g i {moduleName}/interfaces/{interfaceName}`
+
+### Create Service
+
+`ng g s {moduleName}/services/{serviceName}`
+
+### Create Directive
+
+`ng g d {moduleName}/directives/{directiveName}`
+
+### Create Guard
+
+`ng g g {moduleName}/guards/{guardName}`
+
+By Convention we will add Guards to the `Auth` module.
+
+### Start Development Server
+
+`ng serve --watch`
+
+### Build for production
+
+`npm install`
+
+`ng build --prod --build-optimizer --output-path public --base-href /`
+
