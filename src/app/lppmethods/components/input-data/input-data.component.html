@@ -22,13 +22,13 @@
 
             <mat-form-field [ngClass]="{'hide': !showExtra}">
               <mat-label>Number of iterations</mat-label>
-              <input matInput name="iterationsCount" type="number" required [(ngModel)]="numberOfIterations"
+              <input matInput name="iterationsCount" type="number" [required]="showExtra" [(ngModel)]="numberOfIterations"
                      #restrictionsCount="ngModel">
             </mat-form-field>
 
             <mat-form-field [ngClass]="{'hide': !showExtra}" >
               <mat-label>Population Size</mat-label>
-              <input matInput name="populationSize" type="number" required [(ngModel)]="populationSize"
+              <input matInput name="populationSize" type="number" [required]="showExtra" [(ngModel)]="populationSize"
                      #restrictionsCount="ngModel">
             </mat-form-field>
 

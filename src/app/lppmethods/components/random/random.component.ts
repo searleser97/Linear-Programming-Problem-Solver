@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Method} from '../../interfaces/method';
+import {InputData} from '../input-data/InputData';
 
 @Component({
   selector: 'app-random',
@@ -8,18 +9,13 @@ import {Method} from '../../interfaces/method';
 })
 export class RandomComponent implements OnInit, Method {
 
-  hide = true;
-  numberOfIterations: number;
-  populationSize: number;
-
   constructor() {
   }
 
   ngOnInit() {
   }
 
-  execute() {
-    this.hide = true;
+  execute(data: InputData) {
   }
 
   run() {
