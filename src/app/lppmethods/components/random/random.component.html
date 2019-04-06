@@ -1,25 +1,2 @@
 <div class="container">
-  <div class="form-container" >
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title class="form-title-size bold">Input for Random</mat-card-title>
-        <mat-card-subtitle>Fill the required fields</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <form style="display: flex; flex-direction: column;" (ngSubmit)="run()">
-          <div style="display: flex; justify-content: space-between; flex-grow: 0;">
-            <mat-form-field>
-              <mat-label>Number of iterations</mat-label>
-              <input matInput name="variablesCount" type="number" required [(ngModel)]="numberOfIterations">
-            </mat-form-field>
-
-            <mat-form-field>
-              <mat-label>Population size</mat-label>
-              <input matInput name="restrictionsCount" type="number" required [(ngModel)]="populationSize">
-            </mat-form-field>
-          </div>
-        </form>
-      </mat-card-content>
-    </mat-card>
-  </div>
 </div>

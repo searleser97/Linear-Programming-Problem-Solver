@@ -19,6 +19,10 @@ export class MainComponent implements OnInit {
   methods: object = {};
   titles: object = {};
   methodsUrl = methodsUrl;
+  requireExtra = [
+    methodsUrl[0],
+    methodsUrl[4]
+  ];
 
   constructor() {
     this.titles[methodsUrl[0]] = 'Random Algorithm';
@@ -37,6 +41,10 @@ export class MainComponent implements OnInit {
 
   execute(inputData: InputData) {
     this.methods[this.method].execute(inputData);
+  }
+
+  showExtraInputs() {
+    return this.requireExtra.includes(this.method);
   }
 
 }

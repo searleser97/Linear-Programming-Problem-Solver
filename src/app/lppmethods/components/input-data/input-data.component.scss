@@ -10,7 +10,7 @@
 .form-container {
   display: flex;
   height: fit-content;
-  width: 40%;
+  width: fit-content;
 }
 
 @media screen and (max-width: 1000px) {
@@ -20,5 +20,7 @@
 }
 
 mat-form-field {
-  width: 31%;
+  width: 150px;
+  padding-right: 10px;
+  padding-left: 10px;
 }

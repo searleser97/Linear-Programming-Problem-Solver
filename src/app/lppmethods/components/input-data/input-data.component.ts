@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {InputData} from './InputData';
 
 @Component({
@@ -18,6 +18,10 @@ export class InputDataComponent implements OnInit {
   displayMatrix = false;
   isMaximization: boolean;
   autofill = true;
+  numberOfIterations: number;
+  populationSize: number;
+
+  @Input() showExtra = false;
 
   constructor() {
   }
@@ -26,6 +30,8 @@ export class InputDataComponent implements OnInit {
     this.isMaximization = false;
     this.numberOfVariables = 0;
     this.numberOfRestrictions = 0;
+    this.numberOfIterations = 0;
+    this.populationSize = 0;
     if (this.autofill) this.autoFill();
   }
 

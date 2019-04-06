@@ -20,6 +20,18 @@
                      #restrictionsCount="ngModel">
             </mat-form-field>
 
+            <mat-form-field [ngClass]="{'hide': !showExtra}">
+              <mat-label>Number of iterations</mat-label>
+              <input matInput name="iterationsCount" type="number" required [(ngModel)]="numberOfIterations"
+                     #restrictionsCount="ngModel">
+            </mat-form-field>
+
+            <mat-form-field [ngClass]="{'hide': !showExtra}" >
+              <mat-label>Population Size</mat-label>
+              <input matInput name="populationSize" type="number" required [(ngModel)]="populationSize"
+                     #restrictionsCount="ngModel">
+            </mat-form-field>
+
             <mat-form-field>
               <mat-select name="maximize" [(ngModel)]="isMaximization" required #maximize="ngModel">
                 <mat-option [value]="false">Minimize</mat-option>
