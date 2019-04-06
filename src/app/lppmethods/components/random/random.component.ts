@@ -8,12 +8,21 @@ import {Method} from '../../interfaces/method';
 })
 export class RandomComponent implements OnInit, Method {
 
-  constructor() { }
+  hide = true;
+  numberOfIterations: number;
+  populationSize: number;
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
   execute() {
+    this.hide = true;
+  }
+
+  run() {
 
   }
 

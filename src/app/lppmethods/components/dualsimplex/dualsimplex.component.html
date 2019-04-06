@@ -1,5 +1,5 @@
 <div class="container">
-  <div [hidden]="displayMatrix" *ngFor="let iteration of iterations"
+  <div [hidden]="!displayMatrix" *ngFor="let iteration of iterations"
        style="display: flex; align-items: center; flex-direction: column; width: 95%;">
 
     <table mat-table [dataSource]="range(0, iteration.restrictions.length + 2)" style="margin-top: 20px;">

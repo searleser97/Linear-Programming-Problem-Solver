@@ -1,6 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {InputData} from './InputData';
-import {rootRenderNodes} from '@angular/core/src/view';
 
 @Component({
   selector: 'app-input-data',
@@ -12,13 +11,13 @@ export class InputDataComponent implements OnInit {
   @Output() Execute = new EventEmitter<InputData>();
   numberOfVariables: number;
   numberOfRestrictions: number;
-  inputMatrix: object[];
+  inputMatrix: object[] = [];
   variables: string[] = [];
   columnNames: string[] = [];
   rowNames: string[] = [];
   displayMatrix = false;
   isMaximization: boolean;
-  autofill = false;
+  autofill = true;
 
   constructor() {
   }
@@ -27,6 +26,7 @@ export class InputDataComponent implements OnInit {
     this.isMaximization = false;
     this.numberOfVariables = 0;
     this.numberOfRestrictions = 0;
+    if (this.autofill) this.autoFill();
   }
 
   createInputMatrix() {
@@ -38,10 +38,8 @@ export class InputDataComponent implements OnInit {
       this.rowNames.push('R' + i);
     this.columnNames = [' ', ...this.variables, 'Inequality Sign', 'Solution Vector'];
 
-    this.inputMatrix = [];
-
-    if (this.autofill) this.autoFill();
-    else {
+    if (!this.autofill) {
+      this.inputMatrix = [];
       const row = {};
       for (let i = 0; i < this.numberOfVariables + 2; i++) row[i] = 0;
 
