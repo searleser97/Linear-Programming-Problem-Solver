@@ -10,9 +10,10 @@ import { MainComponent } from './components/main/main.component';
 import { RandomComponent } from './components/random/random.component';
 import { AnaliticComponent } from './components/analitic/analitic.component';
 import { GeneticComponent } from './components/genetic/genetic.component';
+import { GeneticInfoComponent } from './components/genetic-info/genetic-info.component';
 
 @NgModule({
-  declarations: [DualsimplexComponent, InputDataComponent, MainComponent, RandomComponent, AnaliticComponent, GeneticComponent],
+  declarations: [DualsimplexComponent, InputDataComponent, MainComponent, RandomComponent, AnaliticComponent, GeneticComponent, GeneticInfoComponent],
   imports: [
     CommonModule,
     LppmethodsRoutingModule,

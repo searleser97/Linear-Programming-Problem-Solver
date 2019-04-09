@@ -37,6 +37,7 @@ export class MainComponent implements OnInit {
 
 
   ngOnInit() {
+    this.method = methodsUrl[3];
     this.methods[methodsUrl[0]] = this.random;
     this.methods[methodsUrl[3]] = this.dualSimplex;
     this.methods[methodsUrl[4]] = this.genetic;
@@ -54,4 +55,7 @@ export class MainComponent implements OnInit {
     return this.requireExtra.includes(this.method);
   }
 
+  isInfo() {
+    return !methodsUrl.includes(this.method);
+  }
 }

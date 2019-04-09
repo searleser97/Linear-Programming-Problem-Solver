@@ -1,7 +1,7 @@
 <div class="container">
   <h1>{{titles[method]}}</h1>
 
-  <app-input-data style="width: 100%;" [showExtra]="showExtraInputs()" [showBits]="method === methodsUrl[4]" (Execute)="execute($event)"></app-input-data>
+  <app-input-data style="width: 100%;" [hidden]="isInfo()" [showExtra]="showExtraInputs()" [showBits]="method === methodsUrl[4]" (Execute)="execute($event)"></app-input-data>
 
   <app-random style="width: 100%;" [hidden]="method !== methodsUrl[0]"></app-random>
 
@@ -16,4 +16,6 @@
   <app-genetic style="width: 100%;" [hidden]="method !== methodsUrl[4]"></app-genetic>
 
   <app-analitic style="width: 100%;" [hidden]="method !== methodsUrl[5]"></app-analitic>
+
+  <app-genetic-info style="width: 100%;" [hidden]="method !== 'info/genetic'"></app-genetic-info>
 </div>
