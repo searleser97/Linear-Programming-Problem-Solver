@@ -43,6 +43,10 @@ export class MainComponent implements OnInit {
   }
 
   execute(inputData: InputData) {
+    if (this.methods[this.method] === undefined) {
+      alert('Select a method');
+      return;
+    }
     this.methods[this.method].execute(inputData);
   }
 

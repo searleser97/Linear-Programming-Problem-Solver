@@ -1,7 +1,7 @@
 <div class="container">
   <h1>{{titles[method]}}</h1>
 
-  <app-input-data style="width: 100%;" [hidden]="!method" [showExtra]="showExtraInputs()" [showBits]="method === methodsUrl[4]" (Execute)="execute($event)"></app-input-data>
+  <app-input-data style="width: 100%;" [showExtra]="showExtraInputs()" [showBits]="method === methodsUrl[4]" (Execute)="execute($event)"></app-input-data>
 
   <app-random style="width: 100%;" [hidden]="method !== methodsUrl[0]"></app-random>
 
