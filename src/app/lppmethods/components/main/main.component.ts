@@ -3,6 +3,7 @@ import {DualsimplexComponent} from '../dualsimplex/dualsimplex.component';
 import {methodsUrl} from '../../../side-nav-bar/components/side-nav/side-nav.strings';
 import {InputData} from '../input-data/InputData';
 import {RandomComponent} from '../random/random.component';
+import {GeneticComponent} from '../genetic/genetic.component';
 
 @Component({
   selector: 'app-main',
@@ -14,6 +15,7 @@ export class MainComponent implements OnInit {
 
   @ViewChild(DualsimplexComponent) dualSimplex;
   @ViewChild(RandomComponent) random;
+  @ViewChild(GeneticComponent) genetic;
 
   @Input() method: string;
   methods: object = {};
@@ -30,13 +32,14 @@ export class MainComponent implements OnInit {
     this.titles[methodsUrl[2]] = 'Simplex 2.0';
     this.titles[methodsUrl[3]] = 'Dual Simplex';
     this.titles[methodsUrl[4]] = 'Genetic Algorithm';
-    this.titles[methodsUrl[4]] = 'Analitic Algorithm';
+    this.titles[methodsUrl[5]] = 'Analitic Algorithm';
   }
 
 
   ngOnInit() {
     this.methods[methodsUrl[0]] = this.random;
     this.methods[methodsUrl[3]] = this.dualSimplex;
+    this.methods[methodsUrl[4]] = this.genetic;
   }
 
   execute(inputData: InputData) {

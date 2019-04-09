@@ -1,3 +1,29 @@
-<p>
-  genetic works!
-</p>
+<div class="container">
+  <div [hidden]="!displayMatrix" *ngFor="let _ of range(1, rounds.length); let roundIndex = index"
+       style="display: flex; align-items: center; flex-direction: column; width: 95%;">
+
+    <table mat-table [dataSource]="range(1, rounds[roundIndex + 1].length)" style="margin-top: 20px;">
+
+      <!--<ng-container matColumnDef="{{columnNames[0]}}">
+        <th mat-header-cell *matHeaderCellDef>{{columnNames[0]}}</th>
+        <td mat-cell *matCellDef="let element; let rowIndex = index;">
+          {{iteration.rowNames[rowIndex]}}
+        </td>
+      </ng-container>-->
+
+      <ng-container *ngFor="let column of columnNames; let colIndex = index;" matColumnDef="{{column}}">
+        <th mat-header-cell *matHeaderCellDef>{{column}}</th>
+        <td mat-cell *matCellDef="let element; let rowIndex = index;">
+          {{getIntOrFixed(rounds[roundIndex + 1][rowIndex + 1][colIndex + 1])}}
+        </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="columnNames;"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnNames;"></tr>
+    </table>
+  </div>
+
+  <div class="vertical_space"></div>
+  <div class="vertical_space"></div>
+</div>

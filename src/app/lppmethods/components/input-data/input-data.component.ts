@@ -17,9 +17,10 @@ export class InputDataComponent implements OnInit {
   rowNames: string[] = [];
   displayMatrix = false;
   isMaximization: boolean;
-  autofill = true;
   numberOfIterations: number;
   populationSize: number;
+  precisionBits: number;
+  autofill = true;
 
   @Input() showExtra = false;
 
@@ -30,8 +31,9 @@ export class InputDataComponent implements OnInit {
     this.isMaximization = false;
     this.numberOfVariables = 0;
     this.numberOfRestrictions = 0;
-    this.numberOfIterations = 0;
-    this.populationSize = 0;
+    this.numberOfIterations = 5;
+    this.populationSize = 5;
+    this.precisionBits = 1;
     if (this.autofill) this.autoFill();
   }
 
@@ -52,29 +54,34 @@ export class InputDataComponent implements OnInit {
       for (let i = 0; i < this.numberOfRestrictions + 1; i++) this.inputMatrix.push(Object.assign({}, row));
     }
 
-
-
     this.displayMatrix = true;
   }
 
   autoFill() {
 
-    // this.isMaximization = false;
-    // this.numberOfVariables = 3;
-    // this.numberOfRestrictions = 3;
-    // const row0 = {0: 0, 1: 1, 2: 2, 3: 3, 4: 0};
-    // const row1 = {0: -4, 1: -2, 2: 1, 3: -1, 4: -1};
-    // const row2 = {0: 8, 1: 1, 2: 1, 3: 2, 4: -1};
-    // const row3 = {0: -2, 1: 0, 2: -1, 3: 1, 4: -1};
-
-    this.isMaximization = true;
+    this.isMaximization = false;
     this.numberOfVariables = 3;
     this.numberOfRestrictions = 3;
+    const row0 = {0: 0, 1: 1, 2: 2, 3: 3, 4: 0};
+    const row1 = {0: -4, 1: -2, 2: 1, 3: -1, 4: -1};
+    const row2 = {0: 8, 1: 1, 2: 1, 3: 2, 4: -1};
+    const row3 = {0: -2, 1: 0, 2: -1, 3: 1, 4: -1};
 
-    const row0 = {0: 0, 1: 5, 2: 4, 3: 5, 4: 0};
-    const row1 = {0: 350, 1: 6, 2: 2, 3: 3, 4: -1};
-    const row2 = {0: 150, 1: 5, 2: 3, 3: 0, 4: -1};
-    const row3 = {0: 20, 1: 0, 2: 0, 3: 1, 4: 1};
+    // for genetic and random with above example
+
+    this.numberOfRestrictions = 6;
+    const row4 = {0: 0, 1: 1, 2: 0, 3: 0, 4: 1};
+    const row5 = {0: 0, 1: 0, 2: 1, 3: 0, 4: 1};
+    const row6 = {0: 0, 1: 0, 2: 0, 3: 1, 4: 1};
+
+    // this.isMaximization = true;
+    // this.numberOfVariables = 3;
+    // this.numberOfRestrictions = 3;
+    //
+    // const row0 = {0: 0, 1: 5, 2: 4, 3: 5, 4: 0};
+    // const row1 = {0: 350, 1: 6, 2: 2, 3: 3, 4: -1};
+    // const row2 = {0: 150, 1: 5, 2: 3, 3: 0, 4: -1};
+    // const row3 = {0: 20, 1: 0, 2: 0, 3: 1, 4: 1};
 
     // this.isMaximization = false;
     // this.numberOfVariables = 3;
@@ -83,11 +90,14 @@ export class InputDataComponent implements OnInit {
     // const row1 = {0: 2000, 1: 0.1, 2: 0.6, 4: -1};
     // const row2 = {0: 6000, 1: 1, 2: 1, 4: -1};
     // const row3 = {0: 4000, 1: 1, 2: 0, 4: -1};
-    //
+
     this.inputMatrix.push(Object.assign({}, row0));
     this.inputMatrix.push(Object.assign({}, row1));
     this.inputMatrix.push(Object.assign({}, row2));
     this.inputMatrix.push(Object.assign({}, row3));
+    this.inputMatrix.push(Object.assign({}, row4));
+    this.inputMatrix.push(Object.assign({}, row5));
+    this.inputMatrix.push(Object.assign({}, row6));
   }
 
   outputData() {
@@ -102,7 +112,8 @@ export class InputDataComponent implements OnInit {
       mat[i] = [];
       for (let j = 0; j < Object.keys(this.inputMatrix[i]).length; j++) mat[i][j] = this.inputMatrix[i][j];
     }
-    this.Execute.emit(new InputData(mat, this.isMaximization, this.numberOfVariables, this.numberOfRestrictions));
+    this.Execute.emit(new InputData(mat, this.isMaximization, this.numberOfVariables, this.numberOfRestrictions,
+      this.numberOfIterations, this.populationSize, this.precisionBits));
   }
 
   range(from: number, to: number) {
@@ -110,8 +121,6 @@ export class InputDataComponent implements OnInit {
     while (from < to) arr.push(from++);
     return arr;
   }
-
-
 
   objectCopy(o: object) {
     const ans = {};
