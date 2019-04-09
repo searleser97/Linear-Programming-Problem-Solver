@@ -32,6 +32,12 @@
                      #restrictionsCount="ngModel">
             </mat-form-field>
 
+            <mat-form-field [ngClass]="{'hide': !showBits}" >
+              <mat-label>Precision Bits</mat-label>
+              <input matInput name="precisionBits" type="number" [required]="showBits" [(ngModel)]="precisionBits"
+                     #restrictionsCount="ngModel">
+            </mat-form-field>
+
             <mat-form-field>
               <mat-select name="maximize" [(ngModel)]="isMaximization" required #maximize="ngModel">
                 <mat-option [value]="false">Minimize</mat-option>
