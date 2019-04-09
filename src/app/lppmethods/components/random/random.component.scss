@@ -1,24 +1,8 @@
-@import '~src/global_classes';
+@import "~src/global_classes";
 
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-}
-
-.form-container {
-  display: flex;
-  height: fit-content;
-  width: 40%;
-}
-
-@media screen and (max-width: 1000px) {
-  .form-container {
-    width: 90%;
-  }
-}
-
-mat-form-field {
-  width: 31%;
 }

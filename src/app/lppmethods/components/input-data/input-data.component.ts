@@ -23,6 +23,7 @@ export class InputDataComponent implements OnInit {
   autofill = true;
 
   @Input() showExtra = false;
+  @Input() showBits = false;
 
   constructor() {
   }
