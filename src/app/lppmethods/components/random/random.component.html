@@ -1,29 +1,28 @@
 <div class="container">
-  <!--<div [hidden]="!displayMatrix" *ngFor="let _ of range(1, rounds.length); let roundIndex = index"-->
-       <!--style="display: flex; align-items: center; flex-direction: column; width: 95%;">-->
+  <div [hidden]="!displayMatrix" *ngFor="let i of range(2, mat.length);"
+       style="display: flex; align-items: center; flex-direction: column; width: 95%;">
 
-    <!--<table mat-table [dataSource]="range(1, rounds[roundIndex + 1].length)" style="margin-top: 20px;">-->
+    <table mat-table [dataSource]="range(0, mat[i].length)" style="margin-top: 20px;">
 
-      <!--&lt;!&ndash;<ng-container matColumnDef="{{columnNames[0]}}">-->
-        <!--<th mat-header-cell *matHeaderCellDef>{{columnNames[0]}}</th>-->
-        <!--<td mat-cell *matCellDef="let element; let rowIndex = index;">-->
-          <!--{{iteration.rowNames[rowIndex]}}-->
-        <!--</td>-->
-      <!--</ng-container>&ndash;&gt;-->
+      <ng-container *ngFor="let j of range(1, mat[i][0].length - 1);" matColumnDef="{{columnNames[j - 1]}}">
+        <th mat-header-cell *matHeaderCellDef>{{columnNames[j - 1]}}</th>
+        <td mat-cell *matCellDef="let element; let rowIndex = index;">
+          {{mat[i][rowIndex][j]}}
+        </td>
+      </ng-container>
 
-      <!--<ng-container *ngFor="let column of columnNames; let colIndex = index;" matColumnDef="{{column}}">-->
-        <!--<th mat-header-cell *matHeaderCellDef>{{column}}</th>-->
-        <!--<td mat-cell *matCellDef="let element; let rowIndex = index;">-->
-          <!--{{getIntOrFixed(rounds[roundIndex + 1][rowIndex + 1][colIndex + 1])}}-->
-        <!--</td>-->
-      <!--</ng-container>-->
+      <ng-container matColumnDef="Z">
+        <th mat-header-cell *matHeaderCellDef>Z</th>
+        <td mat-cell *matCellDef="let element; let rowIndex = index;">
+          {{mat[i][rowIndex][0]}}
+        </td>
+      </ng-container>
 
+      <tr mat-header-row *matHeaderRowDef="columnNames;"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnNames;"></tr>
+    </table>
+  </div>
 
-      <!--<tr mat-header-row *matHeaderRowDef="columnNames;"></tr>-->
-      <!--<tr mat-row *matRowDef="let row; columns: columnNames;"></tr>-->
-    <!--</table>-->
-  <!--</div>-->
-
-  <!--<div class="vertical_space"></div>-->
-  <!--<div class="vertical_space"></div>-->
+  <div class="vertical_space"></div>
+  <div class="vertical_space"></div>
 </div>

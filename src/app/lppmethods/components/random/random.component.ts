@@ -12,6 +12,7 @@ export class RandomComponent implements OnInit, Method {
   displayMatrix = false;
   columnNames = [];
   INF = 1 << 30;
+  mat = [];
 
   constructor() {
   }
@@ -36,11 +37,17 @@ export class RandomComponent implements OnInit, Method {
   }
 
   execute(data: InputData) {
+
     const limits = this.getLimits(data.restrictions);
     limits.shift();
-    const mat = this.metodoAleatorio(data.restrictions, data.iterationsCount, data.populationSize, limits, 0);
-    console.log(mat);
-    this.displayMatrix = true;
+    this.mat = this.metodoAleatorio(data.restrictions, data.iterationsCount, data.populationSize, limits, 0);
+    if (this.mat.length) {
+      const variables = [];
+      for (let i = 0; i < data.variablesCount; i++) variables.push('X' + i);
+      this.columnNames = [...variables, 'Z'];
+      console.log(this.columnNames);
+      this.displayMatrix = true;
+    }
   }
 
   arrayValores(restricciones, ef) {
@@ -66,9 +73,8 @@ export class RandomComponent implements OnInit, Method {
 
   cumpleCondiciones(mat, valores) {
     let resultado = 1;
-    for (let i = 1; i < mat.length; i++) {
+    for (let i = 1; i < mat.length; i++)
       resultado *= this.cumpleCondicion(mat[i], valores);
-    }
     return resultado;
   }
 
@@ -77,9 +83,8 @@ export class RandomComponent implements OnInit, Method {
     const restriccion = condicion[condicion.length - 1];
     const valor = condicion[0];
 
-    for (let i = 1; i < condicion.length - 1; i++) {
+    for (let i = 1; i < condicion.length - 1; i++)
       res += condicion[i] * valores[i - 1];
-    }
     switch (restriccion) {
       case -1:
         return (res <= valor) ? 1 : 0;
@@ -96,9 +101,8 @@ export class RandomComponent implements OnInit, Method {
     const arrayPoblacion = [];
     for (let i = 0; i < nPoblacion; i++) {
       const valores = this.arrayValores(rango, ef);
-      if (this.cumpleCondiciones(matriz, valores) === 1) {
+      if (this.cumpleCondiciones(matriz, valores) === 1)
         arrayPoblacion.push(this.getZ(matriz[0], valores));
-      }
     }
     if (arrayPoblacion.length !== 0 || arrayPoblacion === undefined)
       return arrayPoblacion.sort((a, b) => {
@@ -120,7 +124,7 @@ export class RandomComponent implements OnInit, Method {
     return zRes;
   }
 
-  metodoAleatorio(matriz, nMuestra, nPoblacion, rango, ef) {
+  metodoAleatorio(matriz, nMuestra, nPoblacion, rango, ef): any[] {
     console.log(matriz, nMuestra, nPoblacion, rango, ef);
     let muestraMin = [];
     let muestraMax = [];
@@ -131,6 +135,10 @@ export class RandomComponent implements OnInit, Method {
       conf = this.poblacion(matriz, nPoblacion, rango, ef);
       if (conf !== 'E')
         muestra.push(conf);
+    }
+    if (!muestra.length) {
+      alert('Samples that satisfy the conditions could not be found');
+      return [];
     }
     for (let i = 0; i < muestra.length; i++) {
       muestraMin[i] = this.minimo(muestra[i]);
@@ -153,5 +161,19 @@ export class RandomComponent implements OnInit, Method {
       metodoAl.push(unamuestra);
     console.log(metodoAl);
     return metodoAl;
+  }
+
+  getIntOrFixed(n: number) {
+    if (n === Math.floor(n))
+      return n;
+    else
+      return n.toFixed(3);
+  }
+
+  range(from: number, to: number) {
+    const arr = [];
+    while (from < to)
+      arr.push(from), from++;
+    return arr;
   }
 }
