@@ -7,13 +7,15 @@ export class Option {
   hasSuboptions: boolean;
   suboptions: SubOption[];
   ranks: Set<number>;
+  animate: boolean;
 
-  constructor(description, path, icon, hasSuboptions, suboptions, ranks?) {
+  constructor(description, path, icon, hasSuboptions, suboptions, animate = false, ranks?) {
     this.description = description;
     this.path = path;
     this.icon = icon;
     this.hasSuboptions = hasSuboptions;
     this.suboptions = suboptions;
+    this.animate = animate;
     this.ranks = ranks;
   }
 }

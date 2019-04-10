@@ -63,4 +63,9 @@ export class SideNavComponent implements OnInit {
       this.menu.push(option);
     }
   }
+
+  rotateAndExpand(hasSuboptions, animate, i, elem) {
+    if (!hasSuboptions) elem.close();
+    if (animate) this.flipOptionIcon('option_icon' + i);
+  }
 }
