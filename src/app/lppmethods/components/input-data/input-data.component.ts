@@ -20,7 +20,7 @@ export class InputDataComponent implements OnInit {
   numberOfIterations: number;
   populationSize: number;
   precisionBits: number;
-  autofill = true;
+  autofill = false;
 
   @Input() showExtra = false;
   @Input() showBits = false;
